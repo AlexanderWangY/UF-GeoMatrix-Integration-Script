@@ -8778,7 +8778,7 @@
     "JTYPE": "BLDG"
   },
   {
-    "ID": "0905",
+    "ID": "0906",
     "LAT": "29.73929",
     "LON": "-82.26818",
     "BLDG": "0905",
@@ -13200,6 +13200,17 @@
     "JTYPE": "BLDG"
   },
   {
+    "ID": "1400",
+    "LAT": "29.63809",
+    "LON": "-82.36098",
+    "BLDG": "1400",
+    "NAME": "Horticulture Science Department",
+    "COMMON_NAME": "Horticulture Building",
+    "MAP_NAME": "",
+    "ABBREV": "",
+    "JTYPE": "BLDG"
+  },
+  {
     "ID": "1401",
     "LAT": "29.52383",
     "LON": "-82.29825",
@@ -15887,7 +15898,7 @@
     "OBJID": "F004",
     "LAT": "29.6465344812907",
     "LON": "-82.3542947416805",
-    "BLDG": "",
+    "BLDG": "FLAV",
     "NAME": "Flavet Field and Courts",
     "COMMON_NAME": "",
     "MAP_NAME": "",
