@@ -29,56 +29,81 @@ xxxxxx | yyyyyyyyyyy | gggggggg | hhhhhhhhhhhhhhhhhhhhhhh
 xxxxxx | yyyyyyyyyyy | gggggggg | hhhhhhhhhhhhhhhhhhhhhhh
 '''
 
+
 import json
 import openrouteservice as ors
-
-f = open('locations.json')
-g = open('jsonformatter.json', encoding='utf8')
-
-classLocations = json.load(g)
-
-uniqueSet = set()
-
-for i in classLocations['courses']:
-    for x in i['sections']:
-        for g in x['meetTimes']:
-            if g['meetBldgCode'] != "" and g['meetBldgCode'] != 'WEB' and not uniqueSet.__contains__(g['meetBldgCode']):
-                uniqueSet.add(str(g['meetBldgCode']))
-
-bldgLocations = json.load(f)
-
-filteredLocations = []
-
-for i in bldgLocations:
-    if uniqueSet.__contains__(i['BLDG']):
-        filteredLocations.append(i)
-        uniqueSet.remove(str(i['BLDG']))
+import csv
 
 
-coordArrayRow = []
-
-index = 1
-
-for x in filteredLocations:
-    coordArrayRow.append([x['LON'], x['LAT']])
-
-coordArrayCol = coordArrayRow
-
-print(coordArrayCol)
+def obtainMatrix(locations):
+    client_ORS = ors.Client(key='5b3ce3597851110001cf6248b5572d28507d4d8097e3630d88f745a7')
 
 
-# matrix = client_ORS.distance_matrix(
-#     locations=coordArray,
-#     profile='foot-walking',
-#     metrics=['distance', 'duration'],
-#     validate=False,
-# )
-#
-# print(matrix)
+    matrix = client_ORS.distance_matrix(
+        locations=[[-82.34256812312962, 29.651753436171063], [-82.35245889473404, 29.644630755215996], [-82.33983105472824, 29.645964155293644]],
+        profile='foot-walking',
+        metrics=['distance'],
+        validate=False,
+    )
+
+    print(matrix)
+
+def writeToMatrixCSV():
+    f = open('data.json')
+    testLoc = json.load(f)
+    with open('matrix.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(testLoc["metadata"]["query"]["locations"])
+
+        for x in testLoc["distances"]:
+            writer.writerow(x)
 
 
 
 
+
+
+
+
+def allBuildingsLocations():
+    f = open('locations.json')
+    g = open('jsonformatter.json', encoding='utf8')
+
+    classLocations = json.load(g)
+
+    uniqueSet = set()
+
+    for i in classLocations['courses']:
+        for x in i['sections']:
+            for g in x['meetTimes']:
+                if g['meetBldgCode'] != "" and g['meetBldgCode'] != 'WEB' and not uniqueSet.__contains__(g['meetBldgCode']):
+                    uniqueSet.add(str(g['meetBldgCode']))
+
+    bldgLocations = json.load(f)
+
+    filteredLocations = []
+
+    for i in bldgLocations:
+        if uniqueSet.__contains__(i['BLDG']):
+            filteredLocations.append(i)
+            uniqueSet.remove(str(i['BLDG']))
+
+
+    coordArrayRow = []
+
+    index = 1
+
+    for x in filteredLocations:
+        coordArrayRow.append([x['LON'], x['LAT']])
+
+    coordArrayCol = coordArrayRow
+
+    print(coordArrayCol.__len__())
+
+
+import pandas as pd
+
+data = pd.read_csv('matrix.csv')
 
 
 
