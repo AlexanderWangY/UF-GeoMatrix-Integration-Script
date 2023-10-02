@@ -51,7 +51,7 @@ with open('locationdata/BuildingsNew.json', 'w') as f:
     json.dump(buildingsNew, f)
 
 
-# Here, the algorithim performs its functions and produces a matrix by blocking them together and using the open
+# Here, the algorithm performs its functions and produces a matrix by blocking them together and using the open
 # route service api calls
 for i in range(0, 94, 40):
     xLoc = []
@@ -82,7 +82,7 @@ for i in range(0, buildingCoords.__len__() - 1, 40):
         else:
             for y in range(g, buildingCoords.__len__()):
                 yRange.append(y)
-        #finding distance between buildings, on foot
+        # finding distance between buildings, on foot
         rawMatrix = ors.client.distance_matrix(client=ors.Client(
             key="<YOUR OPENROUTE SERVICE API KEY"), locations=buildingCoords,
             destinations=xRange, sources=yRange,
@@ -129,4 +129,3 @@ for x in distance:
             filteredData[str(y)].append(distance[x][y])
 # Now we only save data where the vertical index is less than the horizontal index
 json.dump(filteredData, halvedDistances)
-
