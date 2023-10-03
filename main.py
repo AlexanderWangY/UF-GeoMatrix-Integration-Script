@@ -16,7 +16,7 @@
 # #
 # # print(uniqueSet.__len__())
 #
-# # Authors: Javier Martinex & Alexander Wang
+# # Authors: Javier Martinez & Alexander Wang
 #
 # '''
 # 1) Extract locations.json and parse it to show only locations with JTYPE = "BLDG"
