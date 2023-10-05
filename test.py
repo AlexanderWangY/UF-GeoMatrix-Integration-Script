@@ -1,6 +1,6 @@
 import csv
 import json
-# import openrouteservice as ors
+import openrouteservice as ors
 
 # Open both CSV and JSON files to find buildings with classrooms and their coordinates.
 
@@ -77,9 +77,8 @@ for i in range(0, len(buildingCoords) - 1, 40):
     else:
         for x in range(i, len(buildingCoords)):
             xRange.append(x)
-    """ Not currently working since API key isn't functioning"""
 
-    """for g in range(0, buildingCoords.__len__() - 1, 40):
+for g in range(0, buildingCoords.__len__() - 1, 40):
         yRange = []
         if not g + 40 > buildingCoords.__len__() - 1:
             for y in range(g, g + 40):
@@ -88,9 +87,8 @@ for i in range(0, len(buildingCoords) - 1, 40):
             for y in range(g, buildingCoords.__len__()):
                 yRange.append(y)
 
-         finding distance between buildings, on foot (CURRENTLY NOT WORKING)
         rawMatrix = ors.client.distance_matrix(client=ors.Client(
-            key="<YOUR OPENROUTE SERVICE API KEY"), locations=buildingCoords,
+            key="5b3ce3597851110001cf624892ed276aeec94d0a9fc3f9a1dfa170ad"), locations=buildingCoords,
             destinations=xRange, sources=yRange,
             profile='foot-walking',
             metrics=['distance'], validate=False)
@@ -135,4 +133,3 @@ for x in distance:
             filteredData[str(y)].append(distance[x][y])
 # Now we only save data where the vertical index is less than the horizontal index
 json.dump(filteredData, halvedDistances)
-"""
